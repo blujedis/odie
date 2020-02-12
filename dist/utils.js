@@ -1,0 +1,70 @@
+import qs from 'qs';
+/**
+ * Stringifies object as query string.
+ *
+ * @param obj the object to be stringified.
+ */
+export var toQuerystring = function (obj, options) {
+    return qs.stringify(obj, options);
+};
+/**
+ * Checks if a value is an object.
+ *
+ * @param value the value to inpsect as an object.
+ */
+export function isObject(value) {
+    return value !== null && typeof value === 'object';
+}
+/**
+ * Checks if a value is a plain object literal.
+ *
+ * @param value the value to inspect as object literal.
+ */
+export function isPlainObject(value) {
+    return isObject(value)
+        && value.constructor === Object
+        && Object.prototype.toString.call(value) === '[object Object]';
+}
+/**
+ * Appends params to a url.
+ *
+ * @param url the url to append query params to.
+ * @param params the query params to stringify.
+ * @param stringifyOptions the stringify options for params.
+ */
+export function appendParams(url, params, stringifyOptions) {
+    if (!params)
+        return url;
+    var _qs;
+    _qs = toQuerystring(params, stringifyOptions);
+    if (!_qs.includes('?'))
+        return url + '?' + _qs;
+    return url + '&' + _qs;
+}
+/**
+ * Normalizes the url appending query params as needed.
+ *
+ * @param base the base url path.
+ * @param url the current url path.
+ * @param params optional query params.
+ * @param stringifyOptions stringify options.
+ */
+export function normalizeUrl(base, url, params, stringifyOptions) {
+    if (!base || /^.+:\/\//.test(url))
+        return url;
+    base = base.replace(/\/$/, '');
+    url = url.replace(/^\//, '');
+    url = base + '/' + url;
+    if (!params)
+        return url;
+    return appendParams(url, params, stringifyOptions);
+}
+/**
+ * Checks if is contains xml http progress event handlers.
+ *
+ * @param options request init options.
+ */
+export function isXHR(options) {
+    return options.onload || options.onend || options.onstart || options.onprogress || options.onerror;
+}
+//# sourceMappingURL=utils.js.map

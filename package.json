@@ -1,0 +1,57 @@
+{
+  "name": "odie",
+  "version": "0.1.0",
+  "description": "Normalized fetch helper.",
+  "main": "dist/index.js",
+  "scripts": {
+    "clean": "rimraf ./dist",
+    "build:ts": "tsc --project tsconfig.json",
+    "build": "npm run clean && npm run build:ts",
+    "docs": "typedoc ./src --options ./typedoc.json --out ./docs && touch ./docs/.nojekyll",
+    "prep": "npm run build && npm run docs",
+    "test": "mocha test/**/*.spec.ts* --require ./register.js --bail"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/primevox/odie.git"
+  },
+  "files": [
+    "dist",
+    "docs",
+    "CHANGE.md",
+    "LICENSE",
+    "README.md"
+  ],
+  "keywords": [
+    "odie",
+    "fetch",
+    "XMLHttpRequest",
+    "get",
+    "put",
+    "post",
+    "delete"
+  ],
+  "author": "Blujedis <blujedicorp@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/primevox/odie/issues"
+  },
+  "homepage": "https://github.com/primevox/odie#readme",
+  "devDependencies": {
+    "@types/chai": "^4.2.6",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.12.5",
+    "chai": "^4.2.0",
+    "eslint": "^6.6.0",
+    "mocha": "^6.2.2",
+    "rimraf": "^3.0.0",
+    "ts-node": "^8.5.4",
+    "tslint": "^5.20.1",
+    "typedoc": "^0.15.0",
+    "typescript": "^3.7.3",
+    "@types/qs": "^6.9.0"
+  },
+  "dependencies": {
+    "qs": "^6.9.1"
+  }
+}
