@@ -1,6 +1,6 @@
 {
   "name": "odie",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Normalized fetch helper.",
   "main": "dist/index.js",
   "scripts": {
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/primevox/odie.git"
+    "url": "git+https://github.com/blujedis/odie.git"
   },
   "files": [
     "dist",
@@ -34,9 +34,9 @@
   "author": "Blujedis <blujedicorp@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/primevox/odie/issues"
+    "url": "https://github.com/blujedis/odie/issues"
   },
-  "homepage": "https://github.com/primevox/odie#readme",
+  "homepage": "https://github.com/blujedis/odie#readme",
   "devDependencies": {
     "@types/chai": "^4.2.6",
     "@types/mocha": "^5.2.7",
