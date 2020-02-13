@@ -242,4 +242,4 @@ function createInstance(baseOrDefaults, defaults) {
     return initRequest;
 }
 export default createInstance;
-//# sourceMappingURL=fido.js.map
+//# sourceMappingURL=odie.js.map
