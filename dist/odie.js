@@ -12,6 +12,7 @@ var __assign = (this && this.__assign) || function () {
 import { createXmlHttp } from './xmlhttp';
 import { DEFAULTS, CONTENT_TYPE_MAP } from './constants';
 import { isPlainObject, normalizeUrl, isXHR } from './utils';
+import merge from 'lodash.merge';
 function handleResponse(res) {
     var contentType = (res.headers.get('content-type') || 'unknown').split(';')[0];
     var resolveType = CONTENT_TYPE_MAP[contentType];
@@ -207,15 +208,16 @@ function createInstance(baseOrDefaults, defaults) {
         function _fetch() {
             var _a = request._options, url = _a.url, params = _a.params, stringifyOptions = _a.stringifyOptions;
             request._options.url = normalizeUrl(baseOrDefaults, url, params, stringifyOptions);
+            var requestOptions = merge(defaults, request._options || {});
             if (isXHR(request._options))
-                return handleXhr(__assign(__assign({}, defaults), request._options));
-            return handleFetch(__assign(__assign({}, defaults), request._options));
+                return handleXhr(requestOptions);
+            return handleFetch(requestOptions);
         }
         // Returns instantiated instance of xhr.
         function _xhr() {
             var _a = request._options, url = _a.url, params = _a.params, stringifyOptions = _a.stringifyOptions;
             request._options.url = normalizeUrl(baseOrDefaults, url, params, stringifyOptions);
-            return createXmlHttp(__assign(__assign({}, defaults), request._options));
+            return createXmlHttp(merge(defaults, request._options));
         }
         return request;
     }

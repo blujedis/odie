@@ -50,6 +50,8 @@ export function appendParams(url, params, stringifyOptions) {
  * @param stringifyOptions stringify options.
  */
 export function normalizeUrl(base, url, params, stringifyOptions) {
+    if (typeof base !== 'string')
+        base = '';
     if (!base || /^.+:\/\//.test(url))
         return url;
     base = base.replace(/\/$/, '');
