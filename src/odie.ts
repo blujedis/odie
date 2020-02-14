@@ -2,6 +2,7 @@ import { createXmlHttp } from './xmlhttp';
 import { IRequestInit, IResponse, BodyType, Method, XHRProgressEvent } from './types';
 import { DEFAULTS, CONTENT_TYPE_MAP } from './constants';
 import { isPlainObject, normalizeUrl, isXHR } from './utils';
+import merge from 'lodash.merge';
 
 function handleResponse<P>(res: Response) {
   const contentType = (res.headers.get('content-type') || 'unknown').split(';')[0];
@@ -235,16 +236,17 @@ function createInstance(baseOrDefaults?: string | IRequestInit, defaults?: IRequ
     function _fetch<P = any>() {
       const { url, params, stringifyOptions } = request._options;
       request._options.url = normalizeUrl(baseOrDefaults as string, url, params, stringifyOptions);
+      const requestOptions = merge(defaults, request._options || {});
       if (isXHR(request._options))
-        return handleXhr<P>({ ...defaults, ...request._options });
-      return handleFetch<P>({ ...defaults, ...request._options });
+        return handleXhr<P>(requestOptions);
+      return handleFetch<P>(requestOptions);
     }
 
     // Returns instantiated instance of xhr.
     function _xhr() {
       const { url, params, stringifyOptions } = request._options;
       request._options.url = normalizeUrl(baseOrDefaults as string, url, params, stringifyOptions);
-      return createXmlHttp({ ...defaults, ...request._options });
+      return createXmlHttp(merge(defaults, request._options));
     }
 
     return request;

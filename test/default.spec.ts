@@ -1,9 +1,9 @@
 import 'mocha';
 import { assert } from 'chai';
-import { permiso } from '../src';
+import Odie from '../src';
 
-describe('Primevox API', () => {
+const odie = Odie();
 
+describe('Odie API', () => {
   //
-
 });
